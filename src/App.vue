@@ -1,8 +1,8 @@
 <template>
 <h1> Please add the URL </h1>
   <form>
-    <input v-model="url"  type="text">
-    <input @click.prevent="getData" type="submit">
+    <input v-model="URL" type="text">
+    <input @click.prevent="getBuiltWithData" type="submit">
   </form> 
   <img alt="Vue logo" src="./assets/logo.png">
 </template>
@@ -17,18 +17,24 @@ export default {
   name: 'App',
   data() {
     return {
+      URL: '',
     }
   },
   methods: {
-    log(text) {
-      console.log(text);
+    getWhoIsData() {
+      axios.get(this.formattedWhoIsURL).then((data) => console.log(data))
     },
-    getData() {
-      axios.get('https://api.coindesk.com/v1/bpi/currentprice.json').then((data) => console.log(data))
+    getBuiltWithData() {
+      axios.get(this.formattedBuiltWithURL).then((data) => console.log(data))
     }
-
   },
   computed: {
+    formattedWhoIsURL() {
+      return `https://api.domaintools.com/v2/domain-search/?query=[${this.URL}]`
+    },
+    formattedBuiltWithURL() {
+      return `https://api.builtwith.com/free1/api.[xml|json]?KEY=0c73f8cb-b699-404e-93f4-3894486431ed&LOOKUP=${this.URL}`
+    }
 
   },
   components: {
