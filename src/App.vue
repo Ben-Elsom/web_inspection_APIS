@@ -1,15 +1,37 @@
 <template>
+<h1> Please add the URL </h1>
+  <form>
+    <input v-model="url"  type="text">
+    <input @click.prevent="getData" type="submit">
+  </form> 
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+// import * as Vue from 'vue' // in Vue 3
+ import axios from 'axios'
+// import VueAxios from 'vue-axios'
 
 export default {
   name: 'App',
+  data() {
+    return {
+    }
+  },
+  methods: {
+    log(text) {
+      console.log(text);
+    },
+    getData() {
+      axios.get('https://api.coindesk.com/v1/bpi/currentprice.json').then((data) => console.log(data))
+    }
+
+  },
+  computed: {
+
+  },
   components: {
-    HelloWorld
   }
 }
 </script>
